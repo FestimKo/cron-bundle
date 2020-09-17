@@ -12,17 +12,17 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 final class CronPruneLogsCommandTest extends TestCase
 {
-    public function testRun() : void
+    public function testRun(): void
     {
-        $prune   = $this->createMock(CronJobResultServiceInterface::class);
+        $prune = $this->createMock(CronJobResultServiceInterface::class);
         $command = new CronPruneLogsCommand($prune);
 
-        $input  = $this->createMock(InputInterface::class);
+        $input = $this->createMock(InputInterface::class);
         $output = new BufferedOutput();
 
         $command->run($input, $output);
 
-        $expected = "Cleaning logs for all cron jobs\nLogs cleaned successfully\n";
+        $expected = "Cleaning logs for all cron jobs\r\nLogs cleaned successfully\r\n";
 
         self::assertEquals($expected, $output->fetch());
         self::assertEquals('shapecode:cron:result:prune', $command->getName());
